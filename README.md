@@ -6,17 +6,18 @@ This framework is used in virtually all of my own concepts as well as some custo
 ## Requirements
 We can not ensure it works on Windows, we do not test our framework on this platform.
 
-Requirements
 * OS: Linux or Unix
 * PHP 5.3.x or newer
 * Apache 2.x or newer
 
-## Contact Information
+
+### Contact Information
 If you want to get in touch with me please use the following contact information.
+
 
 | 			| Personal Information				|
 | --------- | --------------------------------- |
-| Email		| parisnakitakejser@icloud			|
+| Email		| parisnakitakejser@icloud.com		|
 | Blog		| http://parisnakitakejser.com		|
 | Skype		| neonman							|
 | Facebook	| paris.nakita.kejser				|
