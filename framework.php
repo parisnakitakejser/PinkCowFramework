@@ -1,6 +1,15 @@
 <?php
 class PinkCow
 {
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.2
+	 * @version 1.0.0.2
+	 * 
+	 * @var string
+	 */
+	public static $version = '1.0.0.2';
+	
 	public static $frameworkPath = '';
 	
 	public function __construct()
