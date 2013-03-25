@@ -4,11 +4,11 @@ class PinkCow
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
-	 * @version 1.0.0.2
+	 * @version 1.0.0.3
 	 * 
 	 * @var string
 	 */
-	public static $version = '1.0.0.2';
+	public static $version = '1.0.0.3';
 	
 	public static $frameworkPath = '';
 	
