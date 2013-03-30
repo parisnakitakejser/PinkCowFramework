@@ -28,5 +28,12 @@ class Util
 		$exportModul = explode( '.', $modul );
 		require_once( PCF_CFG_FRAMEWORK_PATH . implode('/', $exportModul ) .'/ns.php' );
 	}
+	
+	public static function replace($tag, $content, $tpl)
+	{
+		$tpl = str_replace('{%'. $tag .'%}', $content, $tpl);
+		
+		return $tpl;
+	}
 }
 ?>

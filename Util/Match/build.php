@@ -24,6 +24,21 @@ class Match
 	 * @param string $content
 	 * @return void
 	 */
+	public static function match( $tag , $content )
+	{
+		preg_match("/\[". $tag ."](.+?)\[\/". $tag ."]/s", $content , $match );
+		return $match;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.3
+	 * @version 1.0.0.3
+	 * 
+	 * @param string $tag
+	 * @param string $content
+	 * @return void
+	 */
 	public static function matchAll( $tag , $content )
 	{
 		preg_match_all("/\[". $tag ."](.+?)\[\/". $tag ."]/s", $content , $match );
@@ -79,6 +94,5 @@ class Match
 		
 		return $tpl;
 	}
-
 }
 ?>

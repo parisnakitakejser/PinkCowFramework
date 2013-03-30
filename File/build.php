@@ -62,7 +62,7 @@ class File
 			case 'image/x-xbitmap':
 			case 'image/gi_':
 				$content['file-classification'] = 'Graphic';
-				$content['primary-association'] = 'JPG';
+				$content['primary-association'] = 'GIF';
 				break;
 			
 			// .bmp
@@ -156,6 +156,29 @@ class File
 		}
 		
 		return $content;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.4
+	 * @version 1.0.0.4
+	 *
+	 * @param string $folder
+	 * @return boolean
+	 */
+	public static function createFolderIfNotExists( $folder )
+	{
+		if ( !is_dir( $folder ) )
+		{
+			shell_exec( 'mkdir '. escapeshellcmd( $folder ) );
+			shell_exec( 'chmod -R 755 '. escapeshellcmd( $folder ) );
+			
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }
 ?>
