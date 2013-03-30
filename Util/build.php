@@ -29,6 +29,14 @@ class Util
 		require_once( PCF_CFG_FRAMEWORK_PATH . implode('/', $exportModul ) .'/ns.php' );
 	}
 	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.4
+	 * @version 1.0.0.4
+	 * 
+	 * @param string $modul
+	 * @return void
+	 */
 	public static function replace($tag, $content, $tpl)
 	{
 		$tpl = str_replace('{%'. $tag .'%}', $content, $tpl);
