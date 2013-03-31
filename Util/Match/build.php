@@ -32,6 +32,40 @@ class Match
 	
 	/**
 	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.4
+	 * @version 1.0.0.4
+	 * 
+	 * @param string $tag
+	 * @param string $content
+	 * @return void
+	 */
+	public static function removeMatch( $tag , $content )
+	{
+		$match = self::match( $tag, $content);
+		$content = str_replace( $match[0], '', $content);
+		
+		return $content;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.4
+	 * @version 1.0.0.4
+	 * 
+	 * @param string $tag
+	 * @param string $content
+	 * @return void
+	 */
+	public static function keepMatch( $tag , $content )
+	{
+		$match = self::match( $tag, $content);
+		$content = str_replace( $match[0], $match[1], $content);
+		
+		return $content;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.3
 	 * @version 1.0.0.3
 	 * 
