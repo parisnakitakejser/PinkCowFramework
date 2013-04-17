@@ -1,5 +1,5 @@
 <?php
-namespace Util;
+namespace PinkCow\Util;
 
 /**
  * This modul are for https://www.flowdock.com
