@@ -1061,3 +1061,9 @@ form.bs-docs-example {
     padding-bottom: 20px;
   }
 }
+
+table thead tr th
+{
+	background-color: #f28eec;
+	color: white;
+}
