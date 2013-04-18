@@ -31,6 +31,40 @@ class Util
 	
 	/**
 	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * 
+	 * @param string $file
+	 * @return string
+	 */
+	public static function loadTpl( $file = '' )
+	{
+		if ( !defined('PINKCOW_UTIL_TEMPLATE_PATH') )
+		{
+			$content = gettext('You need to define PINKCOW_UTIL_TEMPLATE_PATH in your config file.');
+		}
+		else
+		{
+			$url = PINKCOW_UTIL_TEMPLATE_PATH;
+		
+			if ( file_exists( $url . $file ) )
+			{
+				$tpl = file_get_contents( $url . $file );
+				$tpl = str_replace( '<?php' , '' , $tpl );
+				$tpl = str_replace( '?>' , '' , $tpl );
+				$content = eval( $content );
+			}
+			else
+			{
+				$content = gettext('The file you are trying to load does not exist<br /><i>Path: '. $url . $file .'</i>' );
+			}
+		}
+		
+		return $content;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.4
 	 * @version 1.0.0.4
 	 * 
