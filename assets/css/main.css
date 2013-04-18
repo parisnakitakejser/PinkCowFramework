@@ -1,8 +1,7 @@
 /* Add additional stylesheets below
 -------------------------------------------------- */
 /*
-  Bootstrap's documentation styles
-  Special styles for presenting Bootstrap's documentation and examples
+  PinkCow's documentation styles
 */
 
 
@@ -10,17 +9,24 @@
 /* Body and structure
 -------------------------------------------------- */
 
-body {
-  position: relative;
-  padding-top: 40px;
+body
+{
+	position: relative;
+	padding-top: 40px;
 }
 
 /* Code in headings */
-h3 code {
-  font-size: 14px;
-  font-weight: normal;
+h3 code 
+{
+	font-size: 14px;
+	font-weight: normal;
 }
 
+h2
+{
+	font-size: 18px;
+	line-height: 24px;
+}
 
 
 /* Tweak navbar brand link to be super sleek
