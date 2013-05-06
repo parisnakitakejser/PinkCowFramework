@@ -52,7 +52,7 @@ class Util
 				$tpl = file_get_contents( $url . $file );
 				$tpl = str_replace( '<?php' , '' , $tpl );
 				$tpl = str_replace( '?>' , '' , $tpl );
-				$content = eval( $content );
+				$content = eval( $tpl );
 			}
 			else
 			{

@@ -20,9 +20,16 @@ class MVC
 		self::$_metaTitle = $metaTitle;
 	}
 	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * 
+	 * @return string
+	 */
 	public static function application()
 	{
-		$mainTpl = util::loadTpl( 'main.php' );
+		$mainTpl = \PinkCow\Util::loadTpl( self::$template );
 	
 		if ( !isset( $_GET['modul'] ) || $_GET['modul'] == '' )
 		{
