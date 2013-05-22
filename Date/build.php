@@ -128,5 +128,64 @@ class Date
 		
 		return $minutesArray;
 	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 *
+	 * @param int $from
+	 * @param int $to
+	 * @return array
+	 */
+	public function getYearInterval($from,$to)
+	{
+		$array = array();
+		
+		for( $i = $from; $i < $to; $i++ )
+		{
+			array_push($array, $i);
+		}
+		
+		return $array;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 *
+	 * @return array
+	 */
+	public function getDayList()
+	{
+		$array = array();
+		
+		for( $i = 1; $i <= 31; $i++ )
+		{
+			array_push( $array, $i );
+		}
+		
+		return $array;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 *
+	 * @return array
+	 */
+	public function getMonthList()
+	{
+		$array = array();
+		
+		for( $i = 1; $i <= 12; $i++ )
+		{
+			array_push( $array, $i );
+		}
+		
+		return $array;
+	}
 }
 ?>

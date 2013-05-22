@@ -279,7 +279,7 @@ class Database
 	{
 		if ( ( $s = self::$_db->prepare( $sql ) ) != false )
 			return $s;
-		else
+		else 
 			return self::$_errorHandler();
 	}
 	
