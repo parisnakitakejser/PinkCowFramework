@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>PinkCow Database Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="../assets/css/bootstrap.css" rel="stylesheet">
+    <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="../assets/css/main.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../assets/ico/apple-touch-icon-144-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+	<link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="shortcut icon" href="../assets/ico/favicon.png">
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+    <!-- Navbar
+    ================================================== -->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="../index.html">PinkCow</a>
+          <div class="nav-collapse collapse">
+              <ul class="nav">
+                <li>
+                  <a href="../index.html">Home</a>
+                </li>
+                <li class="active">
+                  <a href="../documentation.html">Documentation</a>
+                </li>
+                <li class="">
+                  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KUK2Z2WL6LRZW" style="color: red;">Donate</a>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Subhead
+================================================== -->
+<header class="jumbotron subhead" id="overview">
+	<div class="container">
+		<h1>Documentation</h1>
+		<p class="lead">Overview of the project documentation.</p>
+	</div>
+</header>
+
+<div class="container">
+
+	<div class="row">
+		<div class="span3 bs-docs-sidebar">
+			<ul class="nav nav-list bs-docs-sidenav">
+				<li><a href="../documentation.html"><i class="icon-chevron-right"></i> Back to documentation</a></li>
+				<li><a href="#setTable"><i class="icon-chevron-right"></i> setTable</a></li>
+				<li><a href="#bind"><i class="icon-chevron-right"></i> bind</a></li>
+				<li><a href="#commit"><i class="icon-chevron-right"></i> commit</a></li>
+			</ul>
+		</div>
+		<div class="span9 content">
+			
+			<section>
+				<div class="page-header" style="margin-bottom: 0;">
+					<h1>Database\MySQL</h1>
+				</div>
+			</selected>
+			
+			<!-- connect
+			================================================== -->
+			<section id="setTable">
+				
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>setTable(name)</th>
+						</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<td>
+							Description: set name on your table<br />
+							<strong>@return void</strong><br />
+						</td>
+						<tr>
+							<td>
+								<strong>name</strong><br />
+								Type: string<br />
+							</td>
+						</tr>
+					</tr>
+					</tbody>
+				</table>
+			</section>
+			
+			<!-- setDBName
+			================================================== -->
+			<section id="bind">
+				
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>bind(field, value, type)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								Description: bind a field to your table include value and type.<br />
+								<strong>@return void</strong>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>field</strong><br />
+								Type: string<br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>value</strong><br />
+								Type: string<br />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>type</strong><br />
+								Type: string<br />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			
+			<!-- setDBHost
+			================================================== -->
+			<section id="commit">
+				
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th>commit(method)</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>
+								Description: commit your database handler select between <code>insert</code> or <code>update</code><br />
+								<strong>@return void</strong>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>method</strong><br />
+								Type: string<br />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+			
+		</div>
+	</div>
+</div>
+
+<!-- Footer
+================================================== -->
+<footer class="footer">
+	<div class="container">
+		<p>Development by <a href="http://twitter.com/pariskejser" target="_blank">@pariskejser</a>.</p>
+		<p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+		<p>Hand drawn icons by <a href="http://www.olawolska.com" target="_Blank">Aleksandra Wolska</a>
+		
+		<ul class="footer-links">
+			<li><a href="http://parisnakitakejser.com">Blog</a></li>
+			<li class="muted">&middot;</li>
+			<li><a href="https://github.com/parisnakitakejser/pinkcowframework/issues?state=open">Issues</a></li>
+		</ul>
+	</div>
+</footer>
+
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../assets/js/jquery.1.9.1.min.js"></script>
+<script src="../assets/js/bootstrap.2.3.1.min.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/google-code-prettify/prettify.js"></script>
+
+
+<!-- Google Analytic
+================================================== -->
+<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-5930906-6']);
+_gaq.push(['_trackPageview']);
+(function() {
+	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+
+</body>
+</html>
