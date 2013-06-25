@@ -20,5 +20,18 @@ class RegExp
 		
 		return $url;
 	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 *
+	 * @param $url string
+	 * @return string
+	 */
+	public static function isEmailValid( $email )
+	{
+		return preg_match("/^[_a-z0-9-]+((\+|\.)[_a-z0-9-]+)*@[a-z0-9-]+([\.][a-z0-9-]+)+$/i", $email);
+	}
 }
 ?>
