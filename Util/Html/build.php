@@ -17,7 +17,7 @@ class Html
 	 */
 	public static function buildSelect($array = array(), $name = '', $id = '', $selected = '')
 	{
-		$contect = '<select'. ( $id != '' ? ' name="'. $name .'"') .''. ( $id != '' ? ' id="'. $id .'"') .'>';
+		$contect = '<select'. ( $name != '' ? ' name="'. $name .'"' : '' ) .''. ( $id != '' ? ' id="'. $id .'"' : '' ) .'>';
 		
 		if ( count( $array ) > 0 )
 		{
