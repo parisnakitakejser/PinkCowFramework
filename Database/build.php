@@ -77,8 +77,16 @@ class Database
 	
 	/**
 	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @var string
+	 */
+	public static $link = 'default';
+	
+	/**
+	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
-	 * @version 1.0.0.2
+	 * @version 1.0.0.6
 	 *
 	 * @return object
 	 */
@@ -88,12 +96,12 @@ class Database
 		{
 			if ( self::$_db == null ) 
 			{
-				self::$_db = new \PDO(self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName, self::$_DBUser, self::$_DBPass);
-				self::$_db->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
-				self::$_db->setAttribute( \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY , true );
+				self::$_db[self::$link] = new \PDO(self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName, self::$_DBUser, self::$_DBPass);
+				self::$_db[self::$link]->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
+				self::$_db[self::$link]->setAttribute( \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY , true );
 			}
 			
-			return self::$_db;
+			return self::$_db[self::$link];
 		}		
 		catch (PDOException $e) 
 		{
@@ -258,26 +266,26 @@ class Database
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
-	 * @version 1.0.0.2
+	 * @version 1.0.0.6
 	 *
 	 * @return object
 	 */
 	private static function errorHandler()
 	{
-		return self::$_db->errorInfo();
+		return self::$_db[self::$link]->errorInfo();
 	}
 
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
-	 * @version 1.0.0.2
+	 * @version 1.0.0.6
 	 *
 	 * @param string $sql
 	 * @return object
 	 */
 	public static function prepare( $sql )
 	{
-		if ( ( $s = self::$_db->prepare( $sql ) ) != false )
+		if ( ( $s = self::$_db[self::$link]->prepare( $sql ) ) != false )
 			return $s;
 		else 
 			return self::$_errorHandler();
@@ -305,13 +313,13 @@ class Database
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
-	 * @version 1.0.0.2
+	 * @version 1.0.0.6
 	 *
 	 * @return int
 	 */
 	public static function lastInsertId()
 	{
-		return self::$_db->lastInsertId();
+		return self::$_db[self::$link]->lastInsertId();
 	}
 }
 ?>
