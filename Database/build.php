@@ -83,6 +83,12 @@ class Database
 	 */
 	public static $link = 'default';
 	
+	public static $memcache = 0;
+	public static $memcache_server = '127.0.0.1';
+	public static $memcache_port = '11211';
+	
+	private static $_tmpSql = '';
+	
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -246,16 +252,46 @@ class Database
 	 */
 	public static function fetchAll( $query , $bindparams = array() )
 	{
-		if ( count( $bindparams ) > 0 )
+		if( class_exists('Memcache') && self::$memcache == 1 )
 		{
-			foreach( $bindparams AS $v )
+			if ( count( $bindparams ) > 0 )
 			{
-				$query->bindParam( ":{$v[0]}" , $v[1] , self::_bindparam( $v[2] ) );
+				foreach( $bindparams AS $v )
+				{
+					$query->bindParam( ":{$v[0]}" , $v[1] , self::_bindparam( $v[2] ) );
+					
+					self::$_tmpSql = str_replace(":{$v[0]}" , $v[1], self::$_tmpSql);
+				}
+			}
+			
+			$tmpSql = md5( self::$_tmpSql );
+			
+			$m = new \Memcached();
+			$m->addServer( self::$memcache_server, self::$memcache_port);
+			
+			$row = $m->get( $tmpSql );
+			
+			if ( !isset( $row ) )
+			{
+				$query->execute();
+				$row = $query->fetchAll( \PDO::FETCH_OBJ );
+				
+				$m->set($tmpSql , $row, time() + 300);
 			}
 		}
+		else
+		{
+			if ( count( $bindparams ) > 0 )
+			{
+				foreach( $bindparams AS $v )
+				{
+					$query->bindParam( ":{$v[0]}" , $v[1] , self::_bindparam( $v[2] ) );
+				}
+			}
 		
-		$query->execute();
-		$row = $query->fetchAll( \PDO::FETCH_OBJ );
+			$query->execute();
+			$row = $query->fetchAll( \PDO::FETCH_OBJ );
+		}
 		
 		self::$count_select += 1;
 		self::$count_query += 1;
@@ -285,6 +321,8 @@ class Database
 	 */
 	public static function prepare( $sql )
 	{
+		self::$_tmpSql = $sql;
+		
 		if ( ( $s = self::$_db[self::$link]->prepare( $sql ) ) != false )
 			return $s;
 		else 

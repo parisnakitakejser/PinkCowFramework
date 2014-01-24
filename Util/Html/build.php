@@ -13,11 +13,12 @@ class Html
 	 * @param string $name
 	 * @param string $id
 	 * @param string $selected
+	 * @param string $class
 	 * @return string
 	 */
-	public static function buildSelect($array = array(), $name = '', $id = '', $selected = '')
+	public static function buildSelect($array = array(), $name = '', $id = '', $selected = '', $class = '')
 	{
-		$contect = '<select'. ( $name != '' ? ' name="'. $name .'"' : '' ) .''. ( $id != '' ? ' id="'. $id .'"' : '' ) .'>';
+		$contect = '<select'. ( $name != '' ? ' name="'. $name .'"' : '' ) .''. ( $id != '' ? ' id="'. $id .'"' : '' ) .''. ( $class != '' ? ' class="'. $class .'"' : '' ) .'>';
 		
 		if ( count( $array ) > 0 )
 		{

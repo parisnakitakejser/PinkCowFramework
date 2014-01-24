@@ -8,6 +8,16 @@ class File
 	
 	/**
 	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @access public
+	 *
+	 * @var array
+	 */
+	public static $errorHandler = array();
+	
+	/**
+	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.1
 	 * @version 1.0.0.1
 	 *
