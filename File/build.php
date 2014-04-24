@@ -181,7 +181,7 @@ class File
 		if ( !is_dir( $folder ) )
 		{
 			shell_exec( 'mkdir '. escapeshellcmd( $folder ) );
-			shell_exec( 'chmod -R 755 '. escapeshellcmd( $folder ) );
+			shell_exec( 'chmod -R 777 '. escapeshellcmd( $folder ) );
 			
 			return false;
 		}
