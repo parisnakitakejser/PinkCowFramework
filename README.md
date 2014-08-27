@@ -15,9 +15,9 @@ We can not ensure it works on Windows, we do not test our framework on this plat
 If you want to get in touch with me please use the following contact information.
 
 
-| 			| Personal Information				|
+| 					| Personal Information							|
 | --------- | --------------------------------- |
-| Email		| parisnakitakejser@icloud.com		|
-| Blog		| http://parisnakitakejser.com		|
-| Skype		| neonman							|
-| Facebook	| paris.nakita.kejser				|
+| Email			| countact@parisnakitakejser.com		|
+| Blog			| http://parisnakitakejser.com			|
+| Skype			| neonman														|
+| Facebook	| paris.nakita.kejser								|
