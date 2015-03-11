@@ -236,8 +236,11 @@ class Database
 		}
 		
 		$query->execute();
+		
 		self::$count_execute += 1;
 		self::$count_query += 1;
+		
+		return $query->rowCount();
 	}
 
 	
