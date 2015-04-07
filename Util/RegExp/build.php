@@ -42,7 +42,7 @@ class RegExp
 	 * @param string $type
 	 * @return boolean
 	 */
-	function checkUserAgent ( $type = NULL ) 
+	public static function checkUserAgent($type = NULL ) 
 	{
 		$user_agent = strtolower ( $_SERVER['HTTP_USER_AGENT'] );
 		
@@ -81,6 +81,19 @@ class RegExp
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * 
+	 * @param string $string
+	 * @return string
+	 */
+	public static function regexSafe($string)
+	{
+		return addcslashes($string, '\\/.()[]^\$+');
 	}
 }
 ?>
