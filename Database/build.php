@@ -100,11 +100,13 @@ class Database
 	{
 		try 
 		{
-			if ( self::$_db[self::$link] == null ) 
+			if ( !isset(self::$_db[self::$link]) || self::$_db[self::$link] == null ) 
 			{
 				self::$_db[self::$link] = new \PDO(self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName, self::$_DBUser, self::$_DBPass);
 				self::$_db[self::$link]->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
-				self::$_db[self::$link]->setAttribute( \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY , true );
+				
+				if ( self::$_DBType == 'mysql' )
+					self::$_db[self::$link]->setAttribute( \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY , true );
 			}
 			
 			return self::$_db[self::$link];
