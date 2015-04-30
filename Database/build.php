@@ -100,7 +100,7 @@ class Database
 	{
 		try 
 		{
-			if ( self::$_db == null ) 
+			if ( self::$_db[self::$link] == null ) 
 			{
 				self::$_db[self::$link] = new \PDO(self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName, self::$_DBUser, self::$_DBPass);
 				self::$_db[self::$link]->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
@@ -152,7 +152,7 @@ class Database
 	{
 		self::$_DBUser = $var;
 	}
-	
+		
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -165,6 +165,18 @@ class Database
 	{
 		self::$_DBPass = $var;
 	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @var string
+	 */
+	public static function setDBType( $var )
+	{
+		self::$_DBType = $var;
+	}
+	
 	
 	/**
 	 * @author Paris Nakita Kejser
