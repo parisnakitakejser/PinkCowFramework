@@ -95,5 +95,34 @@ class RegExp
 	{
 		return addcslashes($string, '\\/.()[]^\$+');
 	}
+	
+	/**
+		* @author Paris Nakita Kejser
+		* @since 1.1.0.0
+		* @version 1.1.0.0
+		* 
+		* @param string $title
+		* @param boolean $toLower
+		* @param boolean $ignoreDots
+		* @return string
+		*/
+		public static function convertUrl( $title, $toLower = true, $ignoreDots = false )
+		{
+			if ( $toLower === true )
+			{
+				$title = strtolower( $title );
+			}
+		
+			if ( $ignoreDots == true )
+			{
+				$finalStr = trim(preg_replace(array('~[^0-9a-z.]~i', '~-+~'), '-', preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($title, ENT_QUOTES, 'UTF-8'))), '-');
+			}
+			else
+			{
+				$finalStr = trim(preg_replace(array('~[^0-9a-z]~i', '~-+~'), '-', preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($title, ENT_QUOTES, 'UTF-8'))), '-');
+			}
+			
+			return $finalStr;
+		}
 }
 ?>

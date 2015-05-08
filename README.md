@@ -7,8 +7,9 @@ This framework is used in virtually all of my own concepts as well as some custo
 We can not ensure it works on Windows, we do not test our framework on this platform.
 
 * OS: Linux or Unix
-* PHP 5.3.x or newer
+* PHP 5.5.x or newer
 * Apache 2.x or newer
+* NGINX 1.8.x or newer
 
 
 ### Contact Information ###

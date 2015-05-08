@@ -127,14 +127,24 @@ class MongoDB
 		return iterator_to_array( $obj );
 	}
 	
-	public static function findOne()
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.1.0.0
+	 * @version 1.1.0.0
+	 * @access public
+	 *
+	 * @param string $collection
+	 * @param array $query
+	 * @param array $fields
+	 *
+	 * @return object
+	 */
+	public static function findOne($collection='', $query = array(), $fields = array())
 	{
+		$collection = new \MongoCollection(self::$_db, $collection);
+		$obj = $collection->findOne( $query, $fields = array() );
 		
-	}
-	
-	public static function findAndModify()
-	{
-		
+		return $obj;
 	}
 	
 	/**
@@ -153,9 +163,22 @@ class MongoDB
 		$collection->insert( $data );
 	}
 	
-	public static function update()
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.1.0.0
+	 * @version 1.1.0.0
+	 * @access public
+	 *
+	 * @param string $collection
+	 * @param array $fields
+	 * @param array $data
+	 *
+	 * @return object
+	 */
+	public static function update($collection, $fields=array(), $data=array())
 	{
-		
+		$collection = new \MongoCollection(self::$_db, $collection);
+		$collection->update( $fields,$data );
 	}
 	
 	public static function remove()
