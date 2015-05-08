@@ -173,7 +173,7 @@ class MongoDB
 	 * @param array $fields
 	 * @param array $data
 	 *
-	 * @return object
+	 * @return void
 	 */
 	public static function update($collection, $fields=array(), $data=array())
 	{
@@ -181,9 +181,21 @@ class MongoDB
 		$collection->update( $fields,$data );
 	}
 	
-	public static function remove()
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.1.0.0
+	 * @version 1.1.0.0
+	 * @access public
+	 *
+	 * @param string $collection
+	 * @param array $fields
+	 *
+	 * @return void
+	 */
+	public static function remove($collection,$fields)
 	{
-		
+		$collection = new \MongoCollection(self::$_db, $collection);
+		$collection->remove($fields);
 	}
 }
 ?>
