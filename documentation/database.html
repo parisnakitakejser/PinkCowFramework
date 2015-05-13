@@ -8,8 +8,7 @@
     <meta name="author" content="">
 
     <!-- Le styles -->
-    <link href="../assets/css/bootstrap.css" rel="stylesheet">
-    <link href="../assets/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <link href="../assets/css/main.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -29,31 +28,27 @@
 
     <!-- Navbar
     ================================================== -->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="../index.html">PinkCow</a>
-          <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li>
-                  <a href="../index.html">Home</a>
-                </li>
-                <li class="active">
-                  <a href="../documentation.html">Documentation</a>
-                </li>
-                <li class="">
-                  <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KUK2Z2WL6LRZW" style="color: red;">Donate</a>
-                </li>
-              </ul>
-          </div>
-        </div>
-      </div>
-    </div>
+	
+<nav class="navbar navbar-inverse navbar-fixed-top">
+	<div class="container">
+		<div class="navbar-header">
+	    	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	        	<span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="../index.html">PinkCowFramework</a>
+		</div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<li><a href="../index.html">Home</a></li>
+				<li class="active"><a href="../documentation.html">Documentation</a></li>
+				<li class=""><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=KUK2Z2WL6LRZW" style="color: red;">Donate</a></li>
+			</ul>
+		</div><!--/.nav-collapse -->
+	</div>
+</nav>
 
 <!-- Subhead
 ================================================== -->
@@ -67,7 +62,7 @@
 <div class="container">
 
 	<div class="row">
-		<div class="span3 bs-docs-sidebar">
+		<div class="col-md-3 bs-docs-sidebar">
 			<ul class="nav nav-list bs-docs-sidenav">
 				<li><a href="../documentation.html"><i class="icon-chevron-right"></i> Back to documentation</a></li>
 				<li><a href="#connect"><i class="icon-chevron-right"></i> connect</a></li>
@@ -83,7 +78,7 @@
 				<li><a href="#lastInsertId"><i class="icon-chevron-right"></i> lastInsertId</a></li>
 			</ul>
 		</div>
-		<div class="span9 content">
+		<div class="col-md-9 content">
 			
 			<section>
 				<div class="page-header" style="margin-bottom: 0;">
@@ -110,6 +105,21 @@
 					</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample how to connect to database
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">PinkCow::import('Database');
+PinkCow\Database::setDBHost('{database-host}');
+PinkCow\Database::setDBUser('{database-user}');
+PinkCow\Database::setDBPass('{database-pass}');
+PinkCow\Database::setDBName('{database-name}');
+PinkCow\Database::connect();</pre>
+					</div>
+				</div>
+				
 			</section>
 			
 			<!-- setDBName
@@ -137,6 +147,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database name
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">PinkCow\Database::setDBName('{database-name}');</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- setDBHost
@@ -165,6 +184,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">PinkCow\Database::setDBHost('{database-host}');</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- setDBUser
@@ -192,6 +220,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database username
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">PinkCow\Database::setDBUser('{database-user}');</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- setDBPass
@@ -219,6 +256,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database password
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">PinkCow\Database::setDBPass('{database-pass}');</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- fetch
@@ -253,6 +299,21 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">$feild2 = 'sample';
+$query = PinkCow\Database::prepare("SELECT t1.feild1 FROM table1 t1 WHERE td.feild2 = :feild2 LIMIT 1");
+$bindparam = array(
+	array('feild2', $feild2, 'str')
+);
+
+$row = PinkCow\Database::fetch($query, $bindparam);</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- exec
@@ -287,6 +348,23 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">$feild1 = 1337;
+$feild2 = 'sample';
+$query = PinkCow\Database::prepare("UPDATE table1 SET feild1 = :feild1 WHERE td.feild2 = :feild2 LIMIT 1");
+$bindparam = array(
+	array('feild1', $feild1, 'int'),
+	array('feild2', $feild2, 'str'),
+);
+
+PinkCow\Database::exec($query, $bindparam);</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- fetchAll
@@ -321,6 +399,21 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">$feild2 = 'sample';
+$query = PinkCow\Database::prepare("SELECT t1.feild1 FROM table1 t1 WHERE td.feild2 = :feild2");
+$bindparam = array(
+	array('feild2', $feild2, 'str')
+);
+
+$row = PinkCow\Database::fetchAll($query, $bindparam);</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- prepare
@@ -348,6 +441,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">$query = PinkCow\Database::prepare("{sql-query}");</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- statistics
@@ -369,6 +471,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">PinkCow\Database::statistics();</pre>
+					</div>
+				</div>
 			</section>
 			
 			<!-- lastInsertId
@@ -390,6 +501,15 @@
 						</tr>
 					</tbody>
 				</table>
+				
+				<div class="panel panel-default">
+  					<div class="panel-heading">
+						Sample: definde database host
+					</div>
+					<div class="panel-body">
+						<pre class="prettyprint" lang="php">$lastInsertId = PinkCow\Database::lastInsertId();</pre>
+					</div>
+				</div>
 			</section>
 			
 		</div>
@@ -417,9 +537,9 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="../assets/js/jquery.1.9.1.min.js"></script>
-<script src="../assets/js/bootstrap.2.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script src="../assets/js/main.js"></script>
-<script src="../assets/js/google-code-prettify/prettify.js"></script>
+<script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js"></script>
 
 
 <!-- Google Analytic

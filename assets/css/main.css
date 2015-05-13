@@ -1067,3 +1067,10 @@ table thead tr th
 	background-color: #f28eec;
 	color: white;
 }
+
+
+.prettyprinted, .prettyprint
+{
+  border: 0 !important;
+  margin: 0 !important;
+}
