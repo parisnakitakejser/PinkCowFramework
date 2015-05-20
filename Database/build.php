@@ -199,6 +199,14 @@ class Database
 			case 'STR':
 				return \PDO::PARAM_STR;
 				break;
+				
+			case 'BOOL':
+				return \PDO::PARAM_BOOL;
+				break;
+				
+			case 'NULL':
+				return \PDO::PARAM_NULL;
+				break;
 		}
 	}
 	
