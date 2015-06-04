@@ -13,6 +13,10 @@ class MongoDB
 	 */
 	public static $_db = null;
 	
+	private static
+		$_host = '127.0.0.1',
+		$_port = '27017';
+	
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.6
@@ -57,7 +61,7 @@ class MongoDB
 		{
 			if ( self::$_db == null ) 
 			{
-				$m = new \MongoClient();
+				$m = new \MongoClient('mongodb://'. self::$_host .':'. self::$_port );
 				self::$_db = $m->selectDB( self::$database );
 			}
 			
@@ -65,7 +69,7 @@ class MongoDB
 		}		
 		catch (MongoConnectionException $e) 
 		{
-			print '<p>Couldn\'t connect to mongodb, is the "mongo" process running?</p>';
+			print '<p>'. _('Couldn\'t connect to mongodb, is the "mongo" process running?') .'</p>';
 			die();
 		}
 	}
@@ -98,6 +102,14 @@ class MongoDB
 	public static function setSort( $sort = array() )
 	{
 		self::$_sort = $sort;
+	}
+	
+	public static function setHost($value) {
+		self::$_host = $value;
+	}
+	
+	public static function setPort($value) {
+		self::$_port = $value;
 	}
 	
 	/**
