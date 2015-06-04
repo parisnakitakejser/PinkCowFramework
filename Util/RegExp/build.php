@@ -112,14 +112,20 @@ class RegExp
 			{
 				$title = strtolower( $title );
 			}
-		
+			
 			if ( $ignoreDots == true )
 			{
-				$finalStr = trim(preg_replace(array('~[^0-9a-z.]~i', '~-+~'), '-', preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($title, ENT_QUOTES, 'UTF-8'))), '-');
+				$title = trim($title, '-');
+				$title = preg_replace('/[^a-z0-9.]+/', '-', $title);
+			
+				$finalStr = $title;
 			}
 			else
 			{
-				$finalStr = trim(preg_replace(array('~[^0-9a-z]~i', '~-+~'), '-', preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', htmlentities($title, ENT_QUOTES, 'UTF-8'))), '-');
+				$title = trim($title, '-');
+				$title = preg_replace('/[^a-z0-9]+/', '-', $title);
+				
+				$finalStr = $title;
 			}
 			
 			return $finalStr;
