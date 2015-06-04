@@ -124,6 +124,9 @@ class MongoDB
 		if ( count( self::$_sort ) > 0 )
 			$obj->sort( self::$_sort );
 		
+		self::$_limit = 0;
+		self::$_sort = array();
+		
 		return iterator_to_array( $obj );
 	}
 	
