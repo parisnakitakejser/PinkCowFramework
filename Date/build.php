@@ -187,5 +187,40 @@ class Date
 		
 		return $array;
 	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.1.0.1
+	 * @version 1.1.0.1
+	 *
+	 * @param string $skip_days
+	 * @param string $start
+	 * @return string
+	 */
+	public static function goToNextWorkDay($skip_days=1,$start = null) {
+		$start_date = ( $start ? $start : date('Y-m-d') );
+		$date = new \DateTime($start_date);
+		$_days = 0;
+
+		while($_days !== (int) $skip_days) {
+			$date->modify("+1 day");
+			$day_number = date('w', $date->getTimestamp());
+	
+			// Sat & Sun are not a work days - so we want to skip this days
+			if ($day_number == 0 || $day_number == 6 ) {
+				if($day_number == 0) { // Sun add one day
+					$add_to_next_work_day = 1;
+				} else { // Sat add two days
+					$add_to_next_work_day = 2;
+				}
+				$date->modify("+$add_to_next_work_day day");
+			}
+	
+			$_days++;
+		}
+		
+		return $date->getTimestamp();
+			
+	}
 }
 ?>
