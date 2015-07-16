@@ -331,16 +331,12 @@ class Database
 	 *
 	 * @return string
 	 */
-	public static function statistics()
-	{
-		$content = '
-		<code>
-			Select: '. self::$count_select .'<br />
-			Exec: '. self::$count_execute .'<br />
-			Query: '. self::$count_query .'<br />
-		</code>';
-		
-		return $content;
+	public static function statistics() {
+		return [
+			'select' => self::$count_select,
+			'execute' => self::$count_execute,
+			'query' => self::$count_query
+		];
 	}
 	
 	/**

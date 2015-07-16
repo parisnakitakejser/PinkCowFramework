@@ -29,7 +29,7 @@ namespace PinkCow\Security;
 class PasswordHash {
     private  static  $itoa64 = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
     private static  $iteration_count_log2 = 8;
-    private static  $portable_hashes = true ;
+    private static  $portable_hashes = true;
 
     static function  get_random_bytes($count)
     {
