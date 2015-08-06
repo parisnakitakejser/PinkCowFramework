@@ -44,5 +44,25 @@ class UUID
         mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff ), mt_rand( 0, 0xffff )
     );
 	}
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.1.0.1
+	 * @version 1.1.0.1
+	 * 
+	 * @param string $binary
+	 * @return string
+	 */
+	public static function uuidFromBin($binary) {
+		$str = bin2hex($binary);
+		
+		return (
+			substr($str,8,8).'-'.
+			substr($str,4,4).'-'.
+			substr($str,0,4).'-'.
+			substr($str,16,4).'-'.
+			substr($str,20)
+		); 
+	}
 }
 ?>
