@@ -43,6 +43,16 @@ class MongoDB
 	 * @version 1.0.0.6
 	 * @access private
 	 * 
+	 * @var int
+	 */
+	private static $_skip = null;
+	
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @access private
+	 * 
 	 * @var array
 	 */
 	private static $_sort = array();
@@ -104,6 +114,10 @@ class MongoDB
 		self::$_sort = $sort;
 	}
 	
+	public static function setSkip($skip) {
+		self::$_skip = $skip;
+	}
+	
 	public static function setHost($value) {
 		self::$_host = $value;
 	}
@@ -111,6 +125,7 @@ class MongoDB
 	public static function setPort($value) {
 		self::$_port = $value;
 	}
+
 	
 	/**
 	 * @author Paris Nakita Kejser
@@ -136,8 +151,13 @@ class MongoDB
 		if ( count( self::$_sort ) > 0 )
 			$obj->sort( self::$_sort );
 		
+		if (self::$_skip) {
+			$obj->skip(self::$_skip);
+		}
+		
 		self::$_limit = 0;
 		self::$_sort = array();
+		self::$_skip = null;
 		
 		return iterator_to_array( $obj );
 	}
