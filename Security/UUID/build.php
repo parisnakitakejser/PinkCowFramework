@@ -64,5 +64,17 @@ class UUID
 			substr($str,20)
 		); 
 	}
+	
+	public static function uuidToBin($string) {
+		$uuidToBin = str_replace('-','',$string);
+		$uuidIn = (
+			substr($uuidToBin,12,4) .
+			substr($uuidToBin,8,4) .
+			substr($uuidToBin,0,8) .
+			substr($uuidToBin,16,4) .
+			substr($uuidToBin,20)
+		);
+		return pack("H*",$uuidIn);
+	}
 }
 ?>
