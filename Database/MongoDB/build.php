@@ -164,6 +164,26 @@ class MongoDB
 	
 	/**
 	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @access public
+	 *
+	 * @param string $collection
+	 * @param array $query
+	 * @param array $fields
+	 *
+	 * @return object
+	 */
+	public static function count($collection = '', $query = array(), $fields = array() ) {
+		$collection = new \MongoCollection(self::$_db, $collection);
+		
+		$obj = $collection->count($query, $fields );
+		
+		return (int) $obj;
+	}
+	
+	/**
+	 * @author Paris Nakita Kejser
 	 * @since 1.1.0.0
 	 * @version 1.1.0.0
 	 * @access public
