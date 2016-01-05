@@ -202,7 +202,7 @@ class MongoDB
 	public static function findOne($collection='', $query = array(), $fields = array())
 	{
 		$collection = new \MongoCollection(self::$_db, $collection);
-		$obj = $collection->findOne( $query, $fields = array() );
+		$obj = $collection->findOne($query, $fields);
 
 		return $obj;
 	}
