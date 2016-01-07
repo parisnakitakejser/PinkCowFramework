@@ -182,7 +182,7 @@ class MongoDB
 	public static function count($collection = '', $query = array(), $fields = array() ) {
 		$collection = new \MongoCollection(self::$_db, $collection);
 
-		$obj = $collection->count($query, $fields );
+		$obj = $collection->find($query, $fields)->count();
 
 		return (int) $obj;
 	}
