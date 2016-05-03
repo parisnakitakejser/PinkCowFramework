@@ -142,6 +142,7 @@ class MongoDB
 		$collection = new \MongoCollection(self::$_db, $collection);
 
 		$obj = $collection->find( $query, $fields );
+		$obj->timeout(-1);
 
 		if ( self::$_limit > 0 )
 			$obj->limit( self::$_limit );

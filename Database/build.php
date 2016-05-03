@@ -10,7 +10,7 @@ class Database
 	 * @var string
 	 */
 	private static $_DBType = 'mysql';
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -18,7 +18,7 @@ class Database
 	 * @var string
 	 */
 	private static $_DBHost = 'localhost';
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -42,7 +42,7 @@ class Database
 	 * @var string
 	 */
 	private static $_DBPass = '';
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -50,7 +50,7 @@ class Database
 	 * @var string
 	 */
 	public static $count_query = 0;
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -58,7 +58,7 @@ class Database
 	 * @var string
 	 */
 	public static $count_select = 0;
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -74,7 +74,7 @@ class Database
 	 * @var string
 	 */
 	public static $_db = null;
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.6
@@ -82,13 +82,13 @@ class Database
 	 * @var string
 	 */
 	public static $link = 'default';
-	
+
 	public static $memcache = 0;
 	public static $memcache_server = '127.0.0.1';
 	public static $memcache_port = '11211';
-	
+
 	private static $_tmpSql = '';
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -98,26 +98,26 @@ class Database
 	 */
 	public static function connect()
 	{
-		try 
+		try
 		{
-			if ( !isset(self::$_db[self::$link]) || self::$_db[self::$link] == null ) 
+			if ( !isset(self::$_db[self::$link]) || self::$_db[self::$link] == null )
 			{
 				self::$_db[self::$link] = new \PDO(self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName, self::$_DBUser, self::$_DBPass);
 				self::$_db[self::$link]->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
-				
+
 				if ( self::$_DBType == 'mysql' )
 					self::$_db[self::$link]->setAttribute( \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY , true );
 			}
-			
+
 			return self::$_db[self::$link];
-		}		
-		catch (PDOException $e) 
+		}
+		catch (PDOException $e)
 		{
 		    print "Error!: " . $e->getMessage() . "<br/>";
 		    die();
 		}
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -130,7 +130,7 @@ class Database
 	{
 		self::$_DBName = $var;
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -154,7 +154,7 @@ class Database
 	{
 		self::$_DBUser = $var;
 	}
-		
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -167,7 +167,7 @@ class Database
 	{
 		self::$_DBPass = $var;
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.6
@@ -178,8 +178,8 @@ class Database
 	{
 		self::$_DBType = $var;
 	}
-	
-	
+
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -195,21 +195,21 @@ class Database
 			case 'INT':
 				return \PDO::PARAM_INT;
 				break;
-				
+
 			case 'STR':
 				return \PDO::PARAM_STR;
 				break;
-				
+
 			case 'BOOL':
 				return \PDO::PARAM_BOOL;
 				break;
-				
+
 			case 'NULL':
 				return \PDO::PARAM_NULL;
 				break;
 		}
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -228,16 +228,16 @@ class Database
 				$query->bindParam( ":{$v[0]}" , $v[1] , self::_bindparam( $v[2] ) );
 			}
 		}
-		
+
 		$query->execute();
 		$row = $query->fetch( \PDO::FETCH_OBJ );
-		
+
 		self::$count_select += 1;
 		self::$count_query += 1;
-		
+
 		return $row;
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -256,16 +256,16 @@ class Database
 				$query->bindParam( ":{$v[0]}" , $v[1] , self::_bindparam( $v[2] ) );
 			}
 		}
-		
+
 		$query->execute();
-		
+
 		self::$count_execute += 1;
 		self::$count_query += 1;
-		
+
 		return $query->rowCount();
 	}
 
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -284,16 +284,16 @@ class Database
 				$query->bindParam( ":{$v[0]}" , $v[1] , self::_bindparam( $v[2] ) );
 			}
 		}
-		
+
 		$query->execute();
 		$row = $query->fetchAll( \PDO::FETCH_OBJ );
-		
+
 		self::$count_select += 1;
 		self::$count_query += 1;
-		
+
 		return $row;
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -317,13 +317,13 @@ class Database
 	public static function prepare( $sql )
 	{
 		self::$_tmpSql = $sql;
-		
+
 		if ( ( $s = self::$_db[self::$link]->prepare( $sql ) ) != false )
 			return $s;
-		else 
+		else
 			return self::$_errorHandler();
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
@@ -338,7 +338,7 @@ class Database
 			'query' => self::$count_query
 		];
 	}
-	
+
 	/**
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.2
