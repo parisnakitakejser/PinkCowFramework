@@ -31,6 +31,26 @@ class MongoDB
 	 * @author Paris Nakita Kejser
 	 * @since 1.0.0.6
 	 * @version 1.0.0.6
+	 * @access public
+	 *
+	 * @var string
+	 */
+	public static $username = '';
+
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @access public
+	 *
+	 * @var string
+	 */
+	public static $password = '';
+
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
 	 * @access private
 	 *
 	 * @var int
@@ -67,18 +87,18 @@ class MongoDB
 	 */
 	public static function connect()
 	{
-		try
-		{
-			if ( self::$_db == null )
-			{
-				$m = new \MongoClient('mongodb://'. self::$_host .':'. self::$_port );
-				self::$_db = $m->selectDB( self::$database );
+		try {
+			if ( self::$_db == null ) {
+				$auth = '';
+				if(self::$username != '') {
+					$auth = self::$username .':'. self::$password .'@';
+				}
+
+				$m = new \MongoClient('mongodb://'. $auth . self::$_host .':'. self::$_port .'/'. self::$database);
 			}
 
 			return self::$_db;
-		}
-		catch (MongoConnectionException $e)
-		{
+		} catch (MongoConnectionException $e) {
 			print '<p>'. _('Couldn\'t connect to mongodb, is the "mongo" process running?') .'</p>';
 			die();
 		}
