@@ -13,9 +13,25 @@ class MongoDB
 	 */
 	public static $_db = null;
 
-	private static
-		$_host = '127.0.0.1',
-		$_port = '27017';
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @access public
+	 *
+	 * @var string
+	 */
+	public static $host = '127.0.0.1';
+
+	/**
+	 * @author Paris Nakita Kejser
+	 * @since 1.0.0.6
+	 * @version 1.0.0.6
+	 * @access public
+	 *
+	 * @var string
+	 */
+	public static $port = '27017';
 
 	/**
 	 * @author Paris Nakita Kejser
@@ -89,12 +105,12 @@ class MongoDB
 	{
 		try {
 			if ( self::$_db == null ) {
-				$auth = '';
 				if(self::$username != '') {
-					$auth = self::$username .':'. self::$password .'@';
+					$m = new \MongoClient('mongodb://'. self::$username .':'. self::$password .'@'. self::$host .':'. self::$port .'/admin');
+				} else {
+					$m = new \MongoClient('mongodb://'. self::$host .':'. self::$port);
 				}
-
-				$m = new \MongoClient('mongodb://'. $auth . self::$_host .':'. self::$_port .'/'. self::$database);
+				self::$_db = $m->selectDB(self::$database);
 			}
 
 			return self::$_db;
