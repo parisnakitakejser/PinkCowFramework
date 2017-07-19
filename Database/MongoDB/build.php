@@ -103,14 +103,16 @@ class MongoDB
 	 */
 	public static function connect()
 	{
+		#If in doubt use this : https://docs.mongodb.com/php-library/master/tutorial/ ^^
 		try {
 			if ( self::$_db == null ) {
 				if(self::$username != '') {
-					$m = new \MongoClient('mongodb://'. self::$username .':'. self::$password .'@'. self::$host .':'. self::$port .'/admin');
+					$m = new \MongoDB\Client('mongodb://'. self::$username .':'. self::$password .'@'. self::$host .':'. self::$port .'/admin');
 				} else {
-					$m = new \MongoClient('mongodb://'. self::$host .':'. self::$port);
+					$m = new \MongoDB\Client('mongodb://'. self::$host .':'. self::$port);
 				}
-				self::$_db = $m->selectDB(self::$database);
+				$currentDatabase = self::$database;
+				self::$_db = $m->$currentDatabase;
 			}
 
 			return self::$_db;
@@ -175,20 +177,27 @@ class MongoDB
 	 * @return object
 	 */
 	public static function find($collection = '', $query = array(), $fields = array() ) {
-		$collection = new \MongoCollection(self::$_db, $collection);
+		$collection = self::$_db->$collection;
 
-		$obj = $collection->find( $query, $fields );
-		$obj->timeout(-1);
+		$limit = 0;
+		$sort = [];
+		$skip = null;
 
 		if ( self::$_limit > 0 )
-			$obj->limit( self::$_limit );
+			$limit = intval( self::$_limit );
 
 		if ( count( self::$_sort ) > 0 )
-			$obj->sort( self::$_sort );
+			$sort = self::$_sort;
 
 		if (self::$_skip) {
-			$obj->skip(self::$_skip);
+			$skip = self::$_skip;
 		}
+
+		$obj = $collection->find( $query,[
+			'limit' => $limit,
+			'sort' => $sort,
+			'skip' => $skip
+		]);
 
 		self::$_limit = 0;
 		self::$_sort = array();
@@ -198,7 +207,8 @@ class MongoDB
 	}
 
 	public static function aggregate($collection, $ops = []) {
-		$collection = new \MongoCollection(self::$_db, $collection);
+		$collection = self::$_db->$collection;
+
 		$obj = $collection->aggregate($ops);
 
 		return $obj;
@@ -217,9 +227,9 @@ class MongoDB
 	 * @return object
 	 */
 	public static function count($collection = '', $query = array(), $fields = array() ) {
-		$collection = new \MongoCollection(self::$_db, $collection);
+		$collection = self::$_db->$collection;
 
-		$obj = $collection->find($query, $fields)->count();
+		$obj = $collection->count($query, $fields);
 
 		return (int) $obj;
 	}
@@ -238,7 +248,10 @@ class MongoDB
 	 */
 	public static function findOne($collection='', $query = array(), $fields = array())
 	{
-		$collection = new \MongoCollection(self::$_db, $collection);
+		$collection = self::$_db->$collection;
+
+		$fields['limit'] = 1;
+
 		$obj = $collection->findOne($query, $fields);
 
 		return $obj;
@@ -256,8 +269,13 @@ class MongoDB
 	 */
 	public static function insert( $collection, $data = array() )
 	{
-		$collection = new \MongoCollection(self::$_db, $collection);
-		$collection->insert( $data );
+		$collection = self::$_db->$collection;
+
+		if( isset($data[1]) ) {
+			$collection->insertMany( $data );
+		} else {
+			$collection->insertOne( $data );
+		}
 	}
 
 	/**
@@ -274,8 +292,13 @@ class MongoDB
 	 */
 	public static function update($collection, $fields=array(), $data=array())
 	{
-		$collection = new \MongoCollection(self::$_db, $collection);
-		$collection->update( $fields,$data );
+		$collection = self::$_db->$collection;
+
+		if( isset($data[1]) ) {
+			$collection->updateMany( $fields,$data );
+		} else {
+			$collection->updateOne( $fields,$data );
+		}
 	}
 
 	/**
@@ -291,8 +314,8 @@ class MongoDB
 	 */
 	public static function remove($collection,$fields)
 	{
-		$collection = new \MongoCollection(self::$_db, $collection);
-		$collection->remove($fields);
+		$collection = self::$_db->$collection;
+		$collection->deleteOne($fields);
 	}
 }
 ?>
