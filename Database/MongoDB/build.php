@@ -196,9 +196,14 @@ class MongoDB
 		$obj = $collection->find( $query,[
 			'limit' => $limit,
 			'sort' => $sort,
-			'skip' => $skip,
-			'projection' => $fields
+			'skip' => $skip
 		]);
+		// $obj = $collection->find( $query,[
+		// 	'limit' => $limit,
+		// 	'sort' => $sort,
+		// 	'skip' => $skip,
+		// 	'projection' => $fields
+		// ]);
 
 		self::$_limit = 0;
 		self::$_sort = array();
@@ -253,9 +258,10 @@ class MongoDB
 
 		$fields['limit'] = 1;
 
-		$obj = $collection->findOne($query, [
-			'projection' => $fields
-		] );
+		// $obj = $collection->findOne($query, [
+		// 	'projection' => $fields
+		// ] );
+		$obj = $collection->findOne($query, $fields);
 
 		return $obj;
 	}
