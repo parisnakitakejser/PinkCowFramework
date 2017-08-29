@@ -193,17 +193,16 @@ class MongoDB
 			$skip = self::$_skip;
 		}
 
-		$obj = $collection->find( $query,[
-			'limit' => $limit,
-			'sort' => $sort,
-			'skip' => $skip
-		]);
-		// $obj = $collection->find( $query,[
-		// 	'limit' => $limit,
-		// 	'sort' => $sort,
-		// 	'skip' => $skip,
-		// 	'projection' => $fields
-		// ]);
+		$filters = [];
+		$filters['limit'] = $limit;
+		$filters['sort'] = $sort;
+		$filters['skip'] = $skip;
+
+		if(isset($fields) && count($fields) > 0){
+			$filters['projection'] = $fields;
+		}
+
+		$obj = $collection->find( $query, $filters );
 
 		self::$_limit = 0;
 		self::$_sort = array();
@@ -256,12 +255,22 @@ class MongoDB
 	{
 		$collection = self::$_db->$collection;
 
-		$fields['limit'] = 1;
+		$limit = 1;
 
-		// $obj = $collection->findOne($query, [
-		// 	'projection' => $fields
-		// ] );
-		$obj = $collection->findOne($query, $fields);
+		$obj = $collection->findOne($query, [
+			'projection' => $fields
+		] );
+
+		if(isset($fields) && count($fields) > 0){
+			$obj = $collection->findOne($query, [
+				'limit' => $limit,
+				'projection' => $fields
+			] );
+		} else {
+			$obj = $collection->findOne($query, [
+				'limit' => $limit
+			]);
+		}
 
 		return $obj;
 	}
