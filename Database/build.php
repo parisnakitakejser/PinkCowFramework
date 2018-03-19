@@ -102,8 +102,20 @@ class Database
 		{
 			if ( !isset(self::$_db[self::$link]) || self::$_db[self::$link] == null )
 			{
-				self::$_db[self::$link] = new \PDO(self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName, self::$_DBUser, self::$_DBPass);
+				$options = [
+					\PDO::ATTR_EMULATE_PREPARES   => false, // turn off emulation mode for "real" prepared statements
+					\PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION, //turn on errors in the form of exceptions
+					\PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC, //make the default fetch be an associative array
+				];
+
+				self::$_db[self::$link] = new \PDO(
+					self::$_DBType .':host='. self::$_DBHost .';dbname='. self::$_DBName,
+					self::$_DBUser,
+					self::$_DBPass,
+					$options);
 				self::$_db[self::$link]->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
+				self::$_db[self::$link]->setAttribute( \PDO::ATTR_PERSISTENT, true );
+
 
 				if ( self::$_DBType == 'mysql' )
 					self::$_db[self::$link]->setAttribute( \PDO::MYSQL_ATTR_USE_BUFFERED_QUERY , true );
@@ -111,8 +123,8 @@ class Database
 
 			return self::$_db[self::$link];
 		}
-		catch (PDOException $e)
-		{
+		catch (PDOException $e) {
+
 		    print "Error!: " . $e->getMessage() . "<br/>";
 		    die();
 		}
@@ -208,6 +220,52 @@ class Database
 				return \PDO::PARAM_NULL;
 				break;
 		}
+	}
+
+	/**
+	* Transaction, acception stack. Stack will contain all the "exec" options.
+	* Only works with inserts
+	*/
+	public static function transaction($preparedStatements, $insertData){
+
+		/* Begin a transaction, turning off autocommit */
+		self::$_db[self::$link]->beginTransaction();
+		self::$_db[self::$link]->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+
+		$isError = false;
+		$errorMessage = '';
+		try {
+			/* Change the database schema and data */
+			foreach ($preparedStatements as $key => $currentStatement) {
+				$statement = self::$_db[self::$link]->prepare($currentStatement);
+
+				foreach ($insertData[$key] as $keyNew => $elementContent) {
+					$statement->bindParam($insertData[$key][$keyNew][0], $insertData[$key][$keyNew][1] );
+				}
+
+				$statement->execute();
+			}
+		} catch (\Exception $e) {
+
+			$isError = true;
+			$errorMessage = $e->getMessage();
+
+		} finally {
+
+			if($isError === false) {
+				/* All worked fine, enjoy life */
+				self::$_db[self::$link]->commit();
+			} else {
+				/* Recognize mistake and roll back changes */
+				self::$_db[self::$link]->rollBack();
+
+			}
+		}
+
+		return [
+			'status' => $isError ? 404 : 200,
+			'errorMessage' => $errorMessage
+		];
 	}
 
 	/**
