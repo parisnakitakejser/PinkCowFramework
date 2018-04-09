@@ -296,44 +296,27 @@ class MongoDB
 		}
 	}
 
-	/**
-	 * @author Paris Nakita Kejser
-	 * @since 1.1.0.0
-	 * @version 1.1.0.0
-	 * @access public
-	 *
-	 * @param string $collection
-	 * @param array $fields
-	 * @param array $data
-	 *
-	 * @return void
-	 */
 	public static function update($collection, $fields=array(), $data=array())
 	{
 		$collection = self::$_db->$collection;
-
-		if( isset($data[1]) ) {
-			$collection->updateMany( $fields,$data );
-		} else {
-			$collection->updateOne( $fields,$data );
-		}
+		$collection->updateOne( $fields,$data );
 	}
 
-	/**
-	 * @author Paris Nakita Kejser
-	 * @since 1.1.0.0
-	 * @version 1.1.0.0
-	 * @access public
-	 *
-	 * @param string $collection
-	 * @param array $fields
-	 *
-	 * @return void
-	 */
+	public static function updateMany($collection, $fields=array(), $data=array()) {
+		$collection = self::$_db->$collection;
+		$reply = $collection->updateMany( $fields,$data );
+	}
+
 	public static function remove($collection,$fields)
 	{
 		$collection = self::$_db->$collection;
 		$collection->deleteOne($fields);
+	}
+
+	public static function removeMany($collection,$fields)
+	{
+		$collection = self::$_db->$collection;
+		$data = $collection->deleteMany($fields);
 	}
 }
 ?>
