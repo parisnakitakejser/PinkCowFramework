@@ -173,44 +173,16 @@ class File
 	 * @since 1.0.0.4
 	 * @version 1.0.0.4
 	 *
-	 * @param string $folder
-	 * @param boolean $fullpath
-	 * @param int $pathLevel
-	 * @return boolean
+	 * @param string $path Folder path to create
+	 * @param boolean $recursive Create the entire nested structure if necessary
+	 * @param int $mode Octal access mode (for UNIX-like systems)
+	 * @return boolean TRUE if the folder was created or exists, FALSE on failure
 	 */
-	public static function createFolderIfNotExists( $folder, $fullPath = false,$pathLevel=0 )
+	public static function createFolderIfNotExists($path, $recursive=false, $mode=0755)
 	{
-		if ( $fullPath === true ) {
-			$explodeFolder = explode('/', $folder);
-			array_shift($explodeFolder);
-			
-			for($i = 0; $i <= $pathLevel; $i++) {
-				$folderPath[] = $explodeFolder[$i];
-			}
-			
-			$folderMatchPath = '/'. implode('/',$folderPath);
-			
-			if ( !is_dir($folderMatchPath) ) {
-				shell_exec( 'mkdir '. escapeshellcmd( $folderMatchPath ) );
-				shell_exec( 'chmod -R 775 '. escapeshellcmd( $folderMatchPath ) );
-				
-			} else {
-				
-			}
-			
-			if((count($explodeFolder) - 1) > $pathLevel) {
-				\PinkCow\File::createFolderIfNotExists($folder,true,($pathLevel+1));
-			}
-		} else {
-			if ( !is_dir( $folder ) ) {
-				shell_exec( 'mkdir '. escapeshellcmd( $folder ) );
-				shell_exec( 'chmod -R 775 '. escapeshellcmd( $folder ) );
-			
-				return false;
-			} else {
-				return true;
-			}
-		}
+	  if (!file_exists($path))
+		  return mkdir($path, $mode, $recursive);
+
+	  return true;
 	}
 }
-?>
