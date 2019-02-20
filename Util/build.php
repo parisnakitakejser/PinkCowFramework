@@ -59,7 +59,7 @@ class Util {
 	 * @version 1.0.0.4
 	 *
 	 * @param string $modul
-	 * @return void
+	 * @return string
 	 */
 	public static function replace($tag, $content, $tpl) {
 		$tpl = str_replace('{%'. $tag .'%}', $content, $tpl);
