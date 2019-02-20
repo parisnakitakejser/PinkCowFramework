@@ -183,6 +183,6 @@ class File
 	  if (!file_exists($path))
 		  return mkdir($path, $mode, $recursive);
 
-	  return true;
+	  return is_dir($path);
 	}
 }
